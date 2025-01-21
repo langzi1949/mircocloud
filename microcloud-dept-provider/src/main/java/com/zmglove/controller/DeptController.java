@@ -1,8 +1,8 @@
 package com.zmglove.controller;
 
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.zmglove.entity.Dept;
 import com.zmglove.service.DeptService;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,16 +27,15 @@ public class DeptController {
     }
 
     @GetMapping("/hello")
-    @HystrixCommand(fallbackMethod = "processHystrix")
+    @CircuitBreaker(name = "processResilience", fallbackMethod = "processResilience")
     public String hello() {
-
-        if ("Node3".equals(providerName)) {
+        if ("Node1".equals(providerName)) {
             throw new RuntimeException();
         }
         return "Hello Spring Cloud " + providerName;
     }
 
-    public String processHystrix() {
+    public String processResilience(Throwable throwable) {
         return "Sorry, Current Service is down, please wait few minutes....";
     }
 }
