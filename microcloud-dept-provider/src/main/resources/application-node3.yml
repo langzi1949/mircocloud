@@ -1,0 +1,10 @@
+server:
+  port: 8003
+
+# 自定义的属性
+app:
+  provider: Node3
+
+eureka:
+  instance:
+    instance-id: micro-dept-provider-3

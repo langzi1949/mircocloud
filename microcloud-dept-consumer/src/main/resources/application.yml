@@ -1,0 +1,20 @@
+server:
+  port: 8101
+spring:
+  application:
+    name: microcloud-dept-consumer
+
+
+
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: true
+    service-url:
+      defaultZone: http://node1:8081/eureka/
+    registry-fetch-interval-seconds: 10
+
+logging:
+  level:
+    com.netflix.discovery: DEBUG
+

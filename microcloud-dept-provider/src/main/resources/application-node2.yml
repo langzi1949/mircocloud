@@ -1,0 +1,10 @@
+server:
+  port: 8002
+
+# 自定义的属性
+app:
+  provider: Node2
+
+eureka:
+  instance:
+    instance-id: micro-dept-provider-2
