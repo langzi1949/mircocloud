@@ -1,5 +1,6 @@
 package com.zmglove.controller;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.zmglove.entity.Dept;
 import com.zmglove.service.DeptService;
 import jakarta.annotation.Resource;
@@ -26,7 +27,16 @@ public class DeptController {
     }
 
     @GetMapping("/hello")
+    @HystrixCommand(fallbackMethod = "processHystrix")
     public String hello() {
+
+        if ("Node3".equals(providerName)) {
+            throw new RuntimeException();
+        }
         return "Hello Spring Cloud " + providerName;
+    }
+
+    public String processHystrix() {
+        return "Sorry, Current Service is down, please wait few minutes....";
     }
 }
