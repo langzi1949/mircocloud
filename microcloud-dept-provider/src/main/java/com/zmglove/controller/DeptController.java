@@ -29,9 +29,9 @@ public class DeptController {
     @GetMapping("/hello")
     @CircuitBreaker(name = "processResilience", fallbackMethod = "processResilience")
     public String hello() {
-        if ("Node1".equals(providerName)) {
-            throw new RuntimeException();
-        }
+//        if ("Node1".equals(providerName)) {
+//            throw new RuntimeException();
+//        }
         return "Hello Spring Cloud " + providerName;
     }
 

@@ -5,7 +5,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@FeignClient(name = "microcloud-dept-provider")
+@FeignClient(name = "microcloud-dept-provider", fallback = MyHystrixFallback.class)
 public interface MyFeignClient {
 
 
